@@ -1,0 +1,27 @@
+import React from 'react'
+
+const CurrentExchangePrices = () => {
+    fetch("https://api.coincap.io/v2/assets/bitcoin/markets").then((data) => { return data.json() }).then((res) => {
+     console.log(res.data);
+    var dataAdd = ""
+     for (let i = 0; i < res.data.length; i++) {
+       dataAdd += `
+                <div class=" p-6 bg-white rounded-lg border border-gray-200 shadow-md dark:bg-gray-800 dark:border-gray-700 ">
+                <p class="font-normal text-gray-700 dark:text-gray-400"><b> ExchangeId </b>:- ${res.data[i].exchangeId}</p>
+                <p class="font-normal text-gray-700 dark:text-gray-400"> <b>Quote Symbol </b>:-${res.data[i].quoteSymbol}</p> 
+                <h5 class="font-normal text-gray-700 dark:text-gray-400"> <b>Current Price</b>:-${res.data[i].priceUsd}</h5>
+                </div>
+                `;
+       document.getElementById("demo").style.fontSize = "15px";
+     }
+     document.getElementById("demo").innerHTML = dataAdd; 
+  })
+  
+  return (
+    <>
+        <div id="demo" class="flex flex-wrap gap-8 md:flex-wrap-reverse "></div>
+    </>
+  );
+}
+
+export default CurrentExchangePrices

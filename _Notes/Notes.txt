@@ -1,0 +1,91 @@
+style="background-image:url('https://images.unsplash.com/photo-1665085898206-8f9e65f1ff77?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1332&q=80'); background-repeat: no-repeat; background-size: contain;"
+
+
+- for add bg image 
+ add this into the index.html body 
+
+
+->
+How to use image in bg Dynamically
+
+
+import React from "react";
+import hcbgImage from "./hcbg.jpg";
+
+function App() {
+  return (
+      <div
+        class="bg_image"
+        style={{
+          backgroundImage: `url(${hcbgImage})`,
+          backgroundSize: "cover",
+          height: "100vh",
+          color: "#f5f5f5"
+        }}
+      >
+        <h1>This is Text on top</h1>
+      </div>
+  );
+}
+
+export default App;
+
+
+
+->
+How to use image bg Dynamically  on click functions 
+
+ const imgBG =
+    "https://images.unsplash.com/photo-1529686159790-3246c5082afb?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80";
+
+
+ style={{
+          backgroundImage: darkMode ? `url(${imgBG})` : `url(${NaN})`,
+
+
+
+--->How to get the sie of Screen for responsive 
+Create a useWindowDimensions hook.
+
+import { useState, useEffect } from 'react';
+
+function getWindowDimensions() {
+  const { innerWidth: width, innerHeight: height } = window;
+  return {
+    width,
+    height
+  };
+}
+
+export default function useWindowDimensions() {
+  const [windowDimensions, setWindowDimensions] = useState(getWindowDimensions());
+
+  useEffect(() => {
+    function handleResize() {
+      setWindowDimensions(getWindowDimensions());
+    }
+
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
+
+  return windowDimensions;
+}
+
+And after that you'll be able to use it in your components like this
+
+const Component = () => {
+  const { height, width } = useWindowDimensions();
+
+  return (
+    <div>
+      width: {width} ~ height: {height}
+    </div>
+  );
+}
+
+
+
+--- To handle the Error page 
+use a route 
+<Route path="*" element={<Error />} />
